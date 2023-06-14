@@ -1,0 +1,33 @@
+<html>
+<head>
+<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<title>Google Maps - gmplot</title>
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?libraries=visualization&key=AIzaSyBzQ9QaGzWhZDQ3ZxkMKRk4S-lxlZAWE5w"></script>
+<script type="text/javascript">
+    function initialize() {
+        var map = new google.maps.Map(document.getElementById("map_canvas"), {
+            zoom: 14,
+            center: new google.maps.LatLng(43.918684, -78.960163)
+        });
+
+        new google.maps.DirectionsService().route({
+            origin: new google.maps.LatLng(43.918684, -78.960163),
+            destination: new google.maps.LatLng(43.945766, -78.896776),
+            waypoints: [
+                {location: new google.maps.LatLng(43.797439, -79.669648), stopover: false},
+            ],
+            travelMode: "DRIVING"
+        }, function(response, status) {
+            if (status == google.maps.DirectionsStatus.OK) {
+                new google.maps.DirectionsRenderer({map: map}).setDirections(response);
+            }
+        });
+
+    }
+</script>
+</head>
+<body style="margin:0px; padding:0px;" onload="initialize()">
+    <div id="map_canvas" style="width: 100%; height: 100%;" />
+</body>
+</html>
